@@ -20,11 +20,11 @@ export default class Users extends Component{
             tempUser.age-=10;
             return tempUser;
         })
+        
         this.setState({
-          
+            users:newState
         })
-
-        console.log()
+        console.log(this.state.users); // Note: Even though the state was updated this.users still shows the same old state
     }
 
     render(){
@@ -34,7 +34,13 @@ export default class Users extends Component{
                   <button onClick={this.makeYoungHandler}>Click to make your self young.At least for now :)</button>
                  {
                      this.state.users.map((user)=>{
-                        return <User age={user.age} name={user.name}/>
+                        if(user.age>0){
+                            return <User key={user.name} age={user.age} name={user.name}/>
+                        }else{
+                            user.age="NOT ALLOWED"
+                            return <User key={user.name} age={user.age} name={user.name}/>
+                        }
+                       
                      })
                  }
             </div>
